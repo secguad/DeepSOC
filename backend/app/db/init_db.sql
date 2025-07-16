@@ -37,4 +37,16 @@ CREATE TABLE IF NOT EXISTS alerts (
     INDEX idx_date (date),
     INDEX idx_status (status),
     INDEX idx_risk_level (risk_level)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='告警表'; 
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='告警表';
+
+-- 创建机器人配置表
+CREATE TABLE IF NOT EXISTS robot_configs (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    type VARCHAR(20) NOT NULL COMMENT '机器人类型：feishu/dingtalk/wecom',
+    enabled BOOLEAN DEFAULT FALSE COMMENT '是否启用',
+    webhook VARCHAR(512) COMMENT 'Webhook地址',
+    config JSON COMMENT '其他配置信息',
+    created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
+    updated_at DATETIME ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
+    UNIQUE KEY uk_type (type)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='机器人配置表'; 

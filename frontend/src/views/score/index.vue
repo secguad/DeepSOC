@@ -9,7 +9,7 @@
                 type="circle" 
                 :percentage="totalScore" 
                 :color="getScoreColor"
-                :format="(percentage) => percentage + '分'"
+                :format="(percentage: number) => percentage + '分'"
               />
             </div>
             <div class="score-info">
@@ -41,8 +41,8 @@
         <div class="card-header">
           <span>分项评分</span>
           <el-radio-group v-model="detailType" size="small">
-            <el-radio-button label="category">按类别</el-radio-button>
-            <el-radio-button label="department">按部门</el-radio-button>
+            <el-radio-button value="category">按类别</el-radio-button>
+            <el-radio-button value="department">按部门</el-radio-button>
           </el-radio-group>
         </div>
       </template>

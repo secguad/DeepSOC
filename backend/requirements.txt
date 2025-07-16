@@ -1,9 +1,47 @@
-fastapi==0.104.1
-uvicorn==0.24.0
-python-dotenv==1.0.0
-pydantic==2.5.2
+# 基础依赖
+fastapi==0.109.2
+uvicorn==0.27.1
+sqlalchemy==1.4.50
+pydantic>=2.3.0
 pydantic-settings==2.1.0
-aiomysql==0.2.0
-telethon==1.32.1
+python-dotenv==1.0.1
+python-multipart==0.0.9
+python-jose==3.3.0
+passlib==1.7.4
+aiohttp==3.9.3
+telethon==1.34.0
 requests==2.31.0
-python-multipart==0.0.6 
+aiopg==1.4.0
+bcrypt==4.1.2
+alembic==1.15.2
+
+# 图片处理和OCR
+
+# 压缩文件处理
+py7zr>=0.20.0
+
+# 代理支持
+aiohttp-socks>=0.7.1
+
+# 日志和监控
+loguru>=0.5.3
+prometheus-client>=0.12.0
+
+# 测试
+pytest>=6.2.5
+pytest-asyncio>=0.15.1
+pytest-cov>=2.12.1
+
+# 新增依赖
+aiomysql>=0.1.1
+python-telegram-bot>=20.0
+openai>=1.0.0
+email-validator==2.1.0.post1
+flask>=2.0.0
+flask-sqlalchemy>=2.5.0
+flask-cors>=3.0.0
+flask-jwt-extended>=4.3.0
+elasticsearch>=7.0.0
+celery>=5.0.0
+redis>=4.0.0
+beautifulsoup4==4.12.2 

@@ -1,0 +1,29 @@
+from fastapi import FastAPI
+from fastapi.middleware.cors import CORSMiddleware
+from elasticsearch import Elasticsearch
+from app.config.settings import settings
+
+# 初始化Elasticsearch客户端
+es = Elasticsearch(
+    hosts=settings.ES_HOSTS,
+    basic_auth=(settings.ES_USERNAME, settings.ES_PASSWORD) if settings.ES_USERNAME and settings.ES_PASSWORD else None
+)
+
+app = FastAPI(
+    title="DeepSOC API",
+    description="DeepSOC暗网监控系统API",
+    version="1.0.0"
+)
+
+# 配置CORS
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+
+# 导入路由
+from app.api.v1 import router as api_router
+app.include_router(api_router, prefix="/api/v1") 

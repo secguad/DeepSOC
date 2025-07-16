@@ -1,18 +1,15 @@
-from datetime import datetime
-from typing import Optional
-from pydantic import BaseModel
+from sqlalchemy import Column, Integer, String, Boolean, DateTime, func
+from app.db.base_class import Base
 
-class Keyword(BaseModel):
-    """关键词模型"""
-    id: Optional[int] = None
-    word: str
-    category: str
-    risk_level: str
-    description: Optional[str] = None
-    created_by: str
-    created_at: Optional[datetime] = None
-    updated_by: str
-    updated_at: Optional[datetime] = None
+class Keyword(Base):
+    __tablename__ = "keywords"
 
-    class Config:
-        from_attributes = True 
+    id = Column(Integer, primary_key=True, index=True)
+    word = Column(String(100), nullable=False, unique=True, index=True)
+    category = Column(String(50), nullable=False)
+    description = Column(String(500))
+    is_active = Column(Boolean, default=True)
+    match_count = Column(Integer, default=0)
+    last_match_time = Column(DateTime)
+    created_at = Column(DateTime, server_default=func.now())
+    updated_at = Column(DateTime, onupdate=func.now()) 

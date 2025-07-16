@@ -99,9 +99,9 @@
           </el-form-item>
           <el-form-item label="扫描深度">
             <el-radio-group v-model="scanForm.depth">
-              <el-radio label="quick">快速扫描</el-radio>
-              <el-radio label="normal">标准扫描</el-radio>
-              <el-radio label="deep">深度扫描</el-radio>
+              <el-radio value="quick">快速扫描</el-radio>
+              <el-radio value="normal">标准扫描</el-radio>
+              <el-radio value="deep">深度扫描</el-radio>
             </el-radio-group>
           </el-form-item>
           <el-form-item label="并发数">

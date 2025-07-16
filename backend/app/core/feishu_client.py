@@ -1,9 +1,9 @@
 import requests
-from app.config.settings import settings
+from app.core.config import settings
 
 class FeishuClient:
     def __init__(self):
-        self.webhook_url = settings.FEISHU_WEBHOOK_URL
+        self.webhook_url = settings.FEISHU_WEBHOOK
 
     def send_message(self, content: str) -> bool:
         """
@@ -15,32 +15,22 @@ class FeishuClient:
         Returns:
             bool: 发送是否成功
         """
+        if not self.webhook_url:
+            return False
+            
         try:
-            message = {
-                "msg_type": "text",
-                "content": {
-                    "text": content
-                }
-            }
-
-            headers = {'Content-Type': 'application/json'}
             response = requests.post(
                 self.webhook_url,
-                json=message,
-                headers=headers,
-                timeout=5
+                json={
+                    "msg_type": "text",
+                    "content": {
+                        "text": content
+                    }
+                }
             )
-
-            if response.status_code == 200:
-                print("飞书消息发送成功")
-                return True
-            else:
-                print(f"飞书消息发送失败，状态码：{response.status_code}")
-                print(f"错误信息：{response.text}")
-                return False
-
-        except requests.exceptions.RequestException as e:
-            print(f"发送飞书消息时发生异常：{e}")
+            return response.status_code == 200
+        except Exception as e:
+            print(f"发送飞书消息失败: {str(e)}")
             return False
 
     def format_alert_message(self, alert_data: dict) -> str:
@@ -53,10 +43,11 @@ class FeishuClient:
         Returns:
             str: 格式化后的消息内容
         """
-        return (
-            f"关键词监听：{', '.join(alert_data['keywords'])}\n"
-            f"频道ID：{alert_data['channel_id']}\n"
-            f"频道名称：{alert_data['channel_name']}\n"
-            f"消息：{alert_data['content']}\n"
-            f"消息日期：{alert_data['date']}"
-        ) 
+        return f"""
+告警信息：
+时间：{alert_data.get('time', '')}
+级别：{alert_data.get('level', '')}
+类型：{alert_data.get('type', '')}
+来源：{alert_data.get('source', '')}
+内容：{alert_data.get('content', '')}
+        """ 

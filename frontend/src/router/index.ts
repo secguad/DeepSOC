@@ -115,10 +115,29 @@ const routes = [
     meta: { title: '暗网监控' },
     children: [
       {
+        path: 'dashboard',
+        name: 'DarkwebDashboard',
+        component: () => import('../views/darkweb/dashboard/index.vue'),
+        meta: { title: '仪表盘' }
+      },
+      {
         path: 'monitor',
         name: 'DarkwebMonitor',
-        component: () => import('../views/darkweb/monitor/index.vue'),
-        meta: { title: '暗网监控' }
+        meta: { title: '监控配置' },
+        children: [
+          {
+            path: 'history',
+            name: 'DarkwebMonitorHistory',
+            component: () => import('../views/darkweb/monitor/history/index.vue'),
+            meta: { title: '历史数据扫描' }
+          },
+          {
+            path: 'realtime',
+            name: 'DarkwebMonitorRealtime',
+            component: () => import('../views/darkweb/monitor/realtime/index.vue'),
+            meta: { title: '实时消息监听' }
+          }
+        ]
       },
       {
         path: 'keywords',
@@ -127,16 +146,10 @@ const routes = [
         meta: { title: '关键词管理' }
       },
       {
-        path: 'alerts',
-        name: 'DarkwebAlerts',
-        component: () => import('../views/darkweb/alerts/index.vue'),
-        meta: { title: '告警管理' }
-      },
-      {
-        path: 'analysis',
-        name: 'DarkwebAnalysis',
-        component: () => import('../views/darkweb/analysis/index.vue'),
-        meta: { title: '数据分析' }
+        path: 'robot',
+        name: 'DarkwebRobot',
+        component: () => import('../views/darkweb/robot/index.vue'),
+        meta: { title: '告警配置' }
       }
     ]
   },

@@ -11,13 +11,21 @@ export default defineConfig({
     }
   },
   server: {
-    port: 5173,
-    host: true
+    port: 5180,
+    host: '0.0.0.0',
+    proxy: {
+      '/api': {
+        target: 'http://localhost:8000',
+        changeOrigin: true,
+        secure: false,
+        ws: true
+      }
+    }
   },
   build: {
     outDir: 'dist',
     assetsDir: 'assets',
-    sourcemap: true
+    sourcemap: 'inline'
   },
   optimizeDeps: {
     include: ['vue', 'vue-router', 'pinia', 'element-plus']

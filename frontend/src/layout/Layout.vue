@@ -102,21 +102,31 @@
               <el-icon><Monitor /></el-icon>
               <span>暗网监控</span>
             </template>
-            <el-menu-item index="/darkweb/monitor">
-              <el-icon><View /></el-icon>
-              <span>暗网监控</span>
+            <el-menu-item index="/darkweb/dashboard">
+              <el-icon><DataLine /></el-icon>
+              <span>仪表盘</span>
             </el-menu-item>
+            <el-sub-menu index="/darkweb/monitor">
+              <template #title>
+                <el-icon><Monitor /></el-icon>
+                <span>监控配置</span>
+              </template>
+              <el-menu-item index="/darkweb/monitor/history">
+                <el-icon><Timer /></el-icon>
+                <span>历史数据扫描</span>
+              </el-menu-item>
+              <el-menu-item index="/darkweb/monitor/realtime">
+                <el-icon><VideoPlay /></el-icon>
+                <span>实时消息监听</span>
+              </el-menu-item>
+            </el-sub-menu>
             <el-menu-item index="/darkweb/keywords">
               <el-icon><Edit /></el-icon>
               <span>关键词管理</span>
             </el-menu-item>
-            <el-menu-item index="/darkweb/alerts">
+            <el-menu-item index="/darkweb/robot">
               <el-icon><Bell /></el-icon>
-              <span>告警管理</span>
-            </el-menu-item>
-            <el-menu-item index="/darkweb/analysis">
-              <el-icon><DataAnalysis /></el-icon>
-              <span>数据分析</span>
+              <span>告警配置</span>
             </el-menu-item>
           </el-sub-menu>
 
@@ -253,20 +263,21 @@ import {
   Collection,
   Files,
   InfoFilled,
-  View,
+  Edit,
   DataAnalysis,
+  Setting,
   Money,
   Lock,
   User,
   Operation,
   ChatDotRound,
   ChatLineRound,
-  Setting,
   UserFilled,
   Expand,
   Fold,
   ArrowDown,
-  Edit
+  Timer,
+  VideoPlay
 } from '@element-plus/icons-vue'
 
 const route = useRoute()
